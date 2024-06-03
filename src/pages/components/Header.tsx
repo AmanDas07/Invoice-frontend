@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../../Reducers/app/store';
@@ -6,7 +6,6 @@ import { clearAuth } from '../../../Reducers/authSlice';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
-    const [currentTab, setTab] = useState<string>('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = useSelector((state: RootState) => state.auth);
@@ -17,12 +16,6 @@ const Header: React.FC = () => {
         dispatch(clearAuth());
         navigate('/login');
     };
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setTab(window.location.pathname);
-        }
-    }, []);
 
     useEffect(() => {
         const navLinks = document.querySelectorAll('.nav-link');
